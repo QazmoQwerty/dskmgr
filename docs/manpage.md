@@ -1,4 +1,4 @@
-% DSKMGR(1) Dskmgr 0.0.1
+% DSKMGR(1) Dskmgr 0.0.2
 % Shalev Don Meiri
 % January 1, 2022
 
@@ -31,7 +31,10 @@ Dskmgr runs as a daemon (`dskmgrd`), and is controlled through `dskmgr` which co
 -h, \--help
 :   Show help message
 
--v, \--verbose
+-v, \--version
+:   Show version and exit
+
+-V, \--verbose
 :   Enable verbose output
 
 \--wm
