@@ -36,7 +36,7 @@ class DskmgrConnectionHandler(ConnectionHandler):
         connection.send('No arguments given')
 
     def _handle_unknown_command(self, args: List[str], connection: Connection) -> None:
-        connection.send(f'Unknown command: {repr(arg[0])}')
+        connection.send(f'Unknown command: {repr(args[0])}')
 
     def _handle_move(self, args: List[str], connection: Connection) -> None:
         DIRECTIONS = {

@@ -30,7 +30,7 @@ class DesktopManager:
         if not self._is_in_bounds(Location(group, 0)):
             raise GroupOutOfBoundsError(group)
     
-    def _assert_location_in_bounds(self, location, Location) -> None:
+    def _assert_location_in_bounds(self, location: Location) -> None:
         if not self._is_in_bounds(location):
             raise LocationOutOfBoundsError(location)
 

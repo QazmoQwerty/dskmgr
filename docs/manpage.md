@@ -8,7 +8,7 @@ dskmgr - Two dimensional, dynamic desktop/workspace manager for bspwm
 
 # SYNOPSIS
 
-dskmgrd [-h|-v|--wm=WINDOW_MANAGER]
+dskmgrd [-h|-v|--wm *WINDOW_MANAGER*]
 
 dskmgr COMMAND [*OPTIONS*]
 
