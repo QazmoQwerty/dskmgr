@@ -20,6 +20,10 @@ install: ## Install the .whl file
 upload: ## Upload to pypi
 	python3 -m twine upload dist/*
 
+.PHONY: test
+test: ## Test the project
+	python3 -m libdskmgr.scripts.main
+
 .PHONY: clean
 clean: ## Clean generated files
 	-rm -rf dist dskmgr.egg-info/ .mypy_cache/ dist/ __pycache__/
