@@ -21,8 +21,14 @@ upload: ## Upload to pypi
 	python3 -m twine upload dist/*
 
 .PHONY: test
-test: ## Test the project
+test: ## Install documentation
 	python3 -m libdskmgr.scripts.main
+
+.PHONY: install-docs
+install-docs: ## Generate and install manpage
+	pandoc -s -t man docs/manpage.md -o docs/dskmgr.1
+	sudo bash -c "cat docs/dskmgr.1 | gzip > /usr/local/man/man1/dskmgr.1"
+	sudo bash -c "ln -f /usr/local/man/man1/dskmgr.1 /usr/local/man/man1/dskmgrd.1"
 
 .PHONY: clean
 clean: ## Clean generated files
