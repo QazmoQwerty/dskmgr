@@ -22,7 +22,7 @@ upload: ## Upload to pypi
 
 .PHONY: test
 test: ## Install documentation
-	python3 -m libdskmgr.scripts.main --wm bspwm-mock
+	python3 -m libdskmgr.scripts.main --wm bspwm-mock --socket /tmp/dskmgr_mock_socket
 
 .PHONY: install-docs
 install-docs: ## Generate and install manpage
