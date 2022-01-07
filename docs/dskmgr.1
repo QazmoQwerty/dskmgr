@@ -7,7 +7,7 @@
 dskmgr \- Two dimensional, dynamic desktop/workspace manager for bspwm
 .SH SYNOPSIS
 .PP
-dskmgrd [\-h|\-v|\[en]wm WINDOW_MANAGER]
+dskmgrd [\-h|\-v|\[en]wm \f[I]WINDOW_MANAGER\f[R]]
 .PP
 dskmgr COMMAND [\f[I]OPTIONS\f[R]]
 .SH DESCRIPTION
@@ -38,7 +38,10 @@ Dskmgr runs as a daemon (\f[C]dskmgrd\f[R]), and is controlled through
 .B \-h, \-\-help
 Show help message
 .TP
-.B \-v, \-\-verbose
+.B \-v, \-\-version
+Show version and exit
+.TP
+.B \-V, \-\-verbose
 Enable verbose output
 .TP
 .B \-\-wm
@@ -69,6 +72,10 @@ Focus desktop in the specified direction.
 .TP
 .B goto GROUP_INDEX
 Focus the currently focused desktop in the specified group.
+.TP
+.B subscribe
+Continuously send the current state of \f[C]dskmgrd\f[R] (same format as
+\f[C]dump\f[R])
 .SH SEE ALSO
 .PP
 Source code can be found here: <https://github.com/QazmoQwerty/dskmgr>
