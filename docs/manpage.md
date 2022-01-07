@@ -64,6 +64,8 @@ move (up|down|left|right)
 goto GROUP_INDEX
 :   Focus the currently focused desktop in the specified group.
 
+subscribe
+:   Continuously send the current state of `dskmgrd` (same format as `dump`)
 
 # SEE ALSO
 

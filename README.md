@@ -27,8 +27,6 @@ Put `dskmgrd &` in you `bspwmrc`, and then change you desktop-managing shortcuts
 
 ## TODOs
 
-* Add a subscribe command (like `bspc subscribe`).
-
 * Add proper tests.
 
 * Make it so that when an error occurs (or even when an incorrect command is revieved) the `dskmgr` script will know to return an error code.
