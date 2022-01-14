@@ -12,6 +12,9 @@ class Subscribers:
         self._subscriber_connections = set()
 
     def add_subscriber(self, connection: Connection) -> None:
+        try:
+            connection.send(self._desktop_manager.dump_state())
+        except: return
         self._subscriber_connections.add(connection)
         connection.set_auto_closeable(False)
 
