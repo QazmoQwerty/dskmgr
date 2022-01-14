@@ -29,7 +29,7 @@ class DskmgrConnectionHandler(ConnectionHandler):
         elif len(args) == 2 and args[1].isnumeric():
             group = int(args[1])
         else:
-            connection.send('Invalid arguments')
+            connection.send_error('Invalid arguments')
             return
         self._desktop_manager.create_vertical(group)
         self._subscribers.update_all()
@@ -38,10 +38,10 @@ class DskmgrConnectionHandler(ConnectionHandler):
         connection.send(self._desktop_manager.dump_state())
 
     def _handle_no_arguments(self, args: List[str], connection: Connection) -> None:
-        connection.send('No arguments given')
+        connection.send_error('No arguments given')
 
     def _handle_unknown_command(self, args: List[str], connection: Connection) -> None:
-        connection.send(f'Unknown command: {repr(args[0])}')
+        connection.send_error(f'Unknown command: {repr(args[0])}')
 
     def _handle_move(self, args: List[str], connection: Connection) -> None:
         DIRECTIONS = {
@@ -51,7 +51,7 @@ class DskmgrConnectionHandler(ConnectionHandler):
             'right': Direction.RIGHT,
         }
         if len(args) != 2 or args[1] not in DIRECTIONS:
-            connection.send('Invalid arguments')
+            connection.send_error('Invalid arguments')
         else:
             self._desktop_manager.move(DIRECTIONS[args[1]])
             self._subscribers.update_all()
@@ -61,14 +61,14 @@ class DskmgrConnectionHandler(ConnectionHandler):
             self._desktop_manager.reset_desktops(int(args[1]))
             self._subscribers.update_all()
         else:
-            connection.send('Invalid arguments')
+            connection.send_error('Invalid arguments')
 
     def _handle_focus_group(self, args: List[str], connection: Connection) -> None:
         if len(args) == 2 and args[1].isnumeric():
             self._desktop_manager.focus_group(int(args[1]))
             self._subscribers.update_all()
         else:
-            connection.send('Invalid arguments')
+            connection.send_error('Invalid arguments')
 
     def _handle_subscribe(self, args: List[str], connection: Connection) -> None:
         self._subscribers.add_subscriber(connection)
@@ -90,5 +90,4 @@ class DskmgrConnectionHandler(ConnectionHandler):
         try:
             self._get_handler(args)(args, connection)
         except DskmgrError as e:
-            # TODO - figure out how bspc expects errors to be shown
-            connection.send(str(e))
+            connection.send_error(str(e))

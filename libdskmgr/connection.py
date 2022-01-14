@@ -28,6 +28,9 @@ class Connection:
     def send(self, message: Union[str, bytes]) -> None:
         self._socket.sendall(f'{message}\n'.encode() if isinstance(message, str) else message)
     
+    def send_error(self, message: Union[str, bytes]) -> None:
+        self.send(b'\x07' + (f'{message}\n'.encode() if isinstance(message, str) else message))
+    
     def recv(self, buffsize: int = 4096) -> bytes:
         return self._socket.recv(buffsize)
     
