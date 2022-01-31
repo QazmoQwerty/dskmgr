@@ -3,6 +3,9 @@ from typing import List
 from libdskmgr.common import Location
 
 class WindowManager:
+    def get_desktop_name(self, location: Location) -> str:
+        raise NotImplementedError
+
     def create_desktop(self, location: Location) -> None:
         raise NotImplementedError
 

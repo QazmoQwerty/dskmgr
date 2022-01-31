@@ -50,11 +50,22 @@ class DskmgrConnectionHandler(ConnectionHandler):
             'left':  Direction.LEFT,
             'right': Direction.RIGHT,
         }
-        if len(args) != 2 or args[1] not in DIRECTIONS:
-            connection.send_error('Invalid arguments')
-        else:
+        if len(args) == 3 and args[1] in DIRECTIONS:
+            if args[2] in ('-v', '--verbose'):
+                location = self._desktop_manager.move(DIRECTIONS[args[1]])
+                connection.send(self._desktop_manager.get_desktop_name(location))
+                self._subscribers.update_all()
+                return
+            if args[2] in ('-t', '--test'):
+                location = self._desktop_manager.get_movement(DIRECTIONS[args[1]])
+                connection.send(self._desktop_manager.get_desktop_name(location))
+                return
+            return
+        elif len(args) == 2 and args[1] in DIRECTIONS:
             self._desktop_manager.move(DIRECTIONS[args[1]])
             self._subscribers.update_all()
+            return
+        connection.send_error('Invalid arguments')
 
     def _handle_reset(self, args: List[str], connection: Connection) -> None:
         if len(args) == 2 and args[1].isnumeric():

@@ -11,8 +11,7 @@ class BspwmMock(WindowManager):
     def __init__(self, output_file_path: str = DEFAULT_OUTPUT_FILE_PATH) -> None:
         self._output_file_path = output_file_path
 
-    @staticmethod
-    def _get_desktop_name(location: Location) -> str:
+    def get_desktop_name(self, location: Location) -> str:
         return f'{location.x}-{location.y}'
 
     def _log(self, message: str) -> None:
@@ -21,10 +20,10 @@ class BspwmMock(WindowManager):
             file.write(message + '\n')
 
     def create_desktop(self, location: Location) -> None:
-        self._log(f"Creating {BspwmMock._get_desktop_name(location)}")
+        self._log(f"Creating {self.get_desktop_name(location)}")
 
     def focus_desktop(self, location: Location) -> None:
-        self._log(f"Focusing {BspwmMock._get_desktop_name(location)}")
+        self._log(f"Focusing {self.get_desktop_name(location)}")
 
     def initialize_desktops(self, locations: List[Location]) -> None:
-        self._log(f"Initializing desktops [{', '.join(map(BspwmMock._get_desktop_name, locations))}]")
+        self._log(f"Initializing desktops [{', '.join(map(self.get_desktop_name, locations))}]")

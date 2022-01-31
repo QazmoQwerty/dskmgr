@@ -62,9 +62,11 @@ class DesktopManager:
         self._focused_group = location.x
         self._wm.focus_desktop(location)
     
-    def focus_group(self, group: int) -> None:
+    def focus_group(self, group: int) -> Location:
         self._assert_group_in_bounds(group)
-        self.focus_desktop(Location(group, self._groups[group].current))
+        location = Location(group, self._groups[group].current)
+        self.focus_desktop(location)
+        return location
 
     def dump_state(self) -> str:
         return json.dumps({
@@ -72,13 +74,22 @@ class DesktopManager:
             'groups': [{'size': group.size, 'y': group.current} for group in self._groups]
         })
 
-    def move(self, direction: Direction) -> None:
+    def get_movement(self, direction: Direction) -> Location:
         if direction in [Direction.UP, Direction.DOWN]: # move vertically
             vertical_offset = 1 if direction == Direction.UP else -1
             focused_group = self._groups[self._focused_group]
             new_y = (focused_group.current + vertical_offset) % focused_group.size
-            self.focus_desktop(Location(self._focused_group, new_y))
+            return Location(self._focused_group, new_y)
         else: # move horizontally
             horizontal_offset = 1 if direction == Direction.RIGHT else -1
             new_x = (self._focused_group + horizontal_offset) % len(self._groups)
-            self.focus_group(new_x)
+            self._assert_group_in_bounds(new_x)
+            return Location(new_x, self._groups[new_x].current)
+
+    def move(self, direction: Direction) -> Location:
+        location = self.get_movement(direction)
+        self.focus_desktop(location)
+        return location
+
+    def get_desktop_name(self, location: Location) -> str:
+        return self._wm.get_desktop_name(location)
