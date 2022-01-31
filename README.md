@@ -31,14 +31,6 @@ Put `dskmgrd &` in you `bspwmrc`, and then change you desktop-managing shortcuts
 
 * Improve logging support in `dskmgrd`.
 
-* Add a way to delete desktops (both single desktops and desktop groups).
-
-* Add a flag to the `move` command which prints out where we _would_ have moved without actually moving.
-
 * Add a flag to the `new-x` and `new-y` commands which makes them print out the name of the created desktop.
 
 * Add a "hidden desktop" feature - desktops which can only be entered with something like `dskmgr move --hidden DESKTOP_NAME`.
-
-* Support multiple screens.
-
-* Find a better name (maybe "meja"? It means "desk" in Indonesian).
