@@ -67,8 +67,11 @@ Default group is the currently focused group.
 .B dump
 Dump the current state of \f[C]dskmgrd\f[R] to json.
 .TP
-.B move (up|down|left|right)
+.B move (up|down|left|right) [\-t | \-v]
 Focus desktop in the specified direction.
+\-t, \[en]test: instead of moving in the given direction, print out
+where we \f[I]would\f[R] have moved \-v, \[en]verbose: same as
+\f[C]\-t\f[R], except also moves in the given direction
 .TP
 .B goto GROUP_INDEX
 Focus the currently focused desktop in the specified group.

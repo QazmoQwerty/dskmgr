@@ -24,9 +24,12 @@ upload: ## Upload to pypi
 test: ## Install documentation
 	python3 -m libdskmgr.scripts.main --wm bspwm-mock --socket /tmp/dskmgr_mock_socket
 
-.PHONY: install-docs
-install-docs: ## Generate and install manpage
+.PHONY: build-docs
+build-docs: ## Generate manpage
 	pandoc -s -t man docs/manpage.md -o docs/dskmgr.1
+
+.PHONY: install-docs
+install-docs: ## Install manpage
 	sudo bash -c "cat docs/dskmgr.1 | gzip > /usr/local/man/man1/dskmgr.1"
 	sudo bash -c "ln -f /usr/local/man/man1/dskmgr.1 /usr/local/man/man1/dskmgrd.1"
 

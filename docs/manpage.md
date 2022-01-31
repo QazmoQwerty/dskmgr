@@ -58,8 +58,10 @@ new-y [GROUP_INDEX]
 dump
 :   Dump the current state of `dskmgrd` to json.
 
-move (up|down|left|right)
+move (up|down|left|right) [-t | -v]
 :   Focus desktop in the specified direction.
+    -t, --test: instead of moving in the given direction, print out where we *would* have moved
+    -v, --verbose: same as `-t`, except also moves in the given direction
 
 goto GROUP_INDEX
 :   Focus the currently focused desktop in the specified group.

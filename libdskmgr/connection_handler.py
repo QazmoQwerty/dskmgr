@@ -60,7 +60,6 @@ class DskmgrConnectionHandler(ConnectionHandler):
                 location = self._desktop_manager.get_movement(DIRECTIONS[args[1]])
                 connection.send(self._desktop_manager.get_desktop_name(location))
                 return
-            return
         elif len(args) == 2 and args[1] in DIRECTIONS:
             self._desktop_manager.move(DIRECTIONS[args[1]])
             self._subscribers.update_all()
