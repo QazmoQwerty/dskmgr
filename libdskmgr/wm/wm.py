@@ -14,3 +14,9 @@ class WindowManager:
 
     def initialize_desktops(self, locations: List[Location]) -> None:
         raise NotImplementedError
+
+    def remove_desktop(self, location: Location) -> None:
+        raise NotImplementedError
+
+    def change_desktop_location(self, old: Location, new: Location) -> None:
+        raise NotImplementedError

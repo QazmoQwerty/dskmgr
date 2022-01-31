@@ -27,3 +27,9 @@ class BspwmMock(WindowManager):
 
     def initialize_desktops(self, locations: List[Location]) -> None:
         self._log(f"Initializing desktops [{', '.join(map(self.get_desktop_name, locations))}]")
+
+    def remove_desktop(self, location: Location) -> None:
+        self._log(f"Removing {self.get_desktop_name(location)}")
+    
+    def change_desktop_location(self, old: Location, new: Location) -> None:
+        self._log(f"Renaming {self.get_desktop_name(old)} to {self.get_desktop_name(new)}")

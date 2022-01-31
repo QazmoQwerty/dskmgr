@@ -66,6 +66,9 @@ move (up|down|left|right) [-t | -v]
 goto GROUP_INDEX
 :   Focus the currently focused desktop in the specified group.
 
+remove
+:   Deletes the currently focused desktop
+
 subscribe
 :   Continuously send the current state of `dskmgrd` (same format as `dump`)
 

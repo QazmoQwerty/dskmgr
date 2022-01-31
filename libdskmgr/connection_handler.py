@@ -80,6 +80,10 @@ class DskmgrConnectionHandler(ConnectionHandler):
         else:
             connection.send_error('Invalid arguments')
 
+    def _handle_remove(self, args: List[str], connection: Connection) -> None:
+        self._desktop_manager.remove()
+        self._subscribers.update_all()
+    
     def _handle_subscribe(self, args: List[str], connection: Connection) -> None:
         self._subscribers.add_subscriber(connection)
 
@@ -92,6 +96,7 @@ class DskmgrConnectionHandler(ConnectionHandler):
             'goto': self._handle_focus_group,
             'dump': self._handle_dump,
             'subscribe': self._handle_subscribe,
+            'remove': self._handle_remove,
         }.get(args[0]) or self._handle_unknown_command
 
     def handle_connection(self, connection: Connection) -> None:

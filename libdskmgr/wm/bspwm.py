@@ -36,3 +36,11 @@ class Bspwm(WindowManager):
     def initialize_desktops(self, locations: List[Location]) -> None:
         for monitor in self._monitors:
             subprocess.run(['bspc', 'monitor', '--reset-desktops', *[self.get_desktop_name(i, monitor) for i in locations]])
+
+    def remove_desktop(self, location: Location) -> None:
+        for monitor in self._monitors:
+            subprocess.run(['bspc', 'desktop', self.get_desktop_name(location, monitor), '--remove'])
+    
+    def change_desktop_location(self, old: Location, new: Location) -> None:
+        for monitor in self._monitors:
+            subprocess.run(['bspc', 'desktop', self.get_desktop_name(old, monitor), '--rename', self.get_desktop_name(new, monitor)])

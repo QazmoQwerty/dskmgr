@@ -1,5 +1,5 @@
 import json
-from typing import NamedTuple, List
+from typing import NamedTuple, List, Optional
 
 from libdskmgr.wm.wm import WindowManager
 from libdskmgr.common import Location, Direction
@@ -93,3 +93,46 @@ class DesktopManager:
 
     def get_desktop_name(self, location: Location) -> str:
         return self._wm.get_desktop_name(location)
+    
+    def _get_current_location(self) -> Location:
+        return Location(self._focused_group, self._groups[self._focused_group].current)
+
+    def remove(self, location: Optional[Location] = None) -> None:
+        print('focused group:', self._focused_group)
+        current = self._get_current_location()
+        if location is None:
+            location = current
+
+        if len(self._groups) == 1 and self._groups[0].size == 1:
+            return # Can't remove the last desktop!
+
+        stay_in_place = False
+
+        if current.x == location.x:
+            if current.y == location.y:
+                if self._groups[current.x].size == 1:
+                    if current.x != 0:
+                        self.move(Direction.LEFT)
+                    else:
+                        self.move(Direction.RIGHT)
+                        self._focused_group = 0
+                elif current.y != 0:
+                    self.move(Direction.DOWN)
+                else:
+                    self.move(Direction.UP)
+                    self._groups[current.x].current = 0
+            elif current.y > location.y:
+                self._groups[current.x].current -= 1
+        elif current.x > location.x and self._groups[location.x].size == 1:
+            self._focused_group -= 1
+
+        self._wm.remove_desktop(location)
+        for y in range(location.y + 1, self._groups[location.x].size):
+            self._wm.change_desktop_location(Location(location.x, y), Location(location.x, y - 1))
+        self._groups[location.x].size -= 1
+
+        if self._groups[location.x].size == 0:
+            for x in range(location.x + 1, len(self._groups)):
+                for y in range(self._groups[x].size):
+                    self._wm.change_desktop_location(Location(x, y), Location(x - 1, y))
+            self._groups = self._groups[:location.x] + self._groups[location.x + 1:]
