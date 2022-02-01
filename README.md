@@ -34,3 +34,5 @@ Put `dskmgrd &` in you `bspwmrc`, and then change you desktop-managing shortcuts
 * Add a flag to the `new-x` and `new-y` commands which makes them print out the name of the created desktop.
 
 * Add a "hidden desktop" feature - desktops which can only be entered with something like `dskmgr move --hidden DESKTOP_NAME`.
+
+* Fix bug when a window from a non-focused desktop steals focus (`bspwm` changes the focused desktop but `dskmgrd` doesn't notice).
