@@ -1,2 +1,2 @@
 #!/bin/bash
-BSPWM_SOCKET=/tmp/dskmgr_socket bspc $@
+BSPWM_SOCKET=/tmp/dskmgr_socket bspc "$@"
